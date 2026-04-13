@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Soto-Wright Foundation — Inspiring Tomorrow's Innovators</title>
+<meta name="description" content="The Soto-Wright Foundation offers mentorship and scholarships to propel the dreams of future entrepreneurs. Founded by Ivan, Adrianna, and Natalie Soto-Wright.">
+<meta name="keywords" content="Ivan Soto-Wright, Soto-Wright Foundation, MoonPay founder, philanthropy, entrepreneurship, mentorship, scholarships">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-primary: #0a0614;
+  --bg-secondary: #0f0b1e;
+  --bg-card: #13102a;
+  --bg-card-hover: #1a1538;
+  --text-primary: #f0edf5;
+  --text-secondary: #9b95a8;
+  --text-muted: #6b6478;
+  --accent: #8b7cf7;
+  --accent-soft: rgba(139, 124, 247, 0.12);
+  --border: rgba(255,255,255,0.06);
+  --border-hover: rgba(255,255,255,0.12);
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'DM Sans', -apple-system, sans-serif;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+/* ---- ANIMATIONS ---- */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes grain {
+  0%, 100% { transform: translate(0,0); }
+  10% { transform: translate(-5%,-10%); }
+  30% { transform: translate(3%,-15%); }
+  50% { transform: translate(-8%,5%); }
+  70% { transform: translate(10%,10%); }
+  90% { transform: translate(-3%,8%); }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
+/* ---- GRAIN OVERLAY ---- */
+body::before {
+  content: '';
+  position: fixed;
+  inset: -50%;
+  width: 200%;
+  height: 200%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+  animation: grain 8s steps(10) infinite;
+  opacity: 0.4;
+}
+
+/* ---- NAV ---- */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 0 clamp(24px, 5vw, 80px);
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(10, 6, 20, 0.85);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  animation: fadeIn 1s ease;
+}
+nav .logo svg { height: 28px; width: auto; }
+nav .nav-links { display: flex; gap: 36px; align-items: center; }
+nav .nav-links a {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  transition: color 0.3s;
+}
+nav .nav-links a:hover { color: var(--text-primary); }
+
+/* ---- HERO ---- */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 120px clamp(24px, 8vw, 160px) 80px;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 40%, rgba(139, 124, 247, 0.08) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 50% at 20% 80%, rgba(90, 70, 200, 0.05) 0%, transparent 60%);
+  pointer-events: none;
+}
+.hero-logo {
+  margin-bottom: 48px;
+  animation: fadeIn 1.2s ease 0.2s both;
+}
+.hero-logo svg { height: 140px; width: auto; opacity: 0.9; }
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(42px, 7vw, 88px);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  max-width: 900px;
+  animation: fadeUp 1s ease 0.4s both;
+}
+.hero h1 em {
+  font-style: italic;
+  color: var(--accent);
+}
+.hero-sub {
+  margin-top: 32px;
+  font-size: clamp(16px, 1.8vw, 20px);
+  color: var(--text-secondary);
+  max-width: 580px;
+  line-height: 1.7;
+  animation: fadeUp 1s ease 0.6s both;
+}
+.hero-pillars {
+  margin-top: 56px;
+  display: flex;
+  gap: 40px;
+  animation: fadeUp 1s ease 0.8s both;
+}
+.hero-pillars span {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.hero-pillars span::before {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  background: var(--accent);
+  border-radius: 50%;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+.hero-scroll {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: fadeIn 1s ease 1.2s both;
+}
+.hero-scroll span {
+  display: block;
+  width: 1px;
+  height: 48px;
+  background: linear-gradient(to bottom, var(--accent), transparent);
+  margin: 0 auto;
+}
+
+/* ---- SECTION SHARED ---- */
+section {
+  padding: clamp(80px, 10vw, 140px) clamp(24px, 5vw, 80px);
+}
+.section-label {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 24px;
+}
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 4.5vw, 60px);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  max-width: 800px;
+}
+.section-title em { font-style: italic; }
+.section-body {
+  font-size: clamp(16px, 1.4vw, 19px);
+  color: var(--text-secondary);
+  line-height: 1.75;
+  max-width: 680px;
+  margin-top: 28px;
+}
+
+/* ---- MISSION ---- */
+.mission {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+.mission-visual {
+  position: relative;
+  height: 500px;
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+}
+.mission-visual::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 30% 40%, rgba(139, 124, 247, 0.15) 0%, transparent 60%),
+    radial-gradient(circle at 70% 70%, rgba(90, 60, 180, 0.1) 0%, transparent 50%);
+}
+.mission-quote {
+  position: absolute;
+  bottom: 40px;
+  left: 40px;
+  right: 40px;
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-style: italic;
+  line-height: 1.5;
+  color: var(--text-primary);
+  opacity: 0.8;
+}
+
+/* ---- PILLARS ---- */
+.pillars-section { background: var(--bg-secondary); }
+.pillars-grid {
+  max-width: 1200px;
+  margin: 60px auto 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.pillar-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 48px 36px;
+  transition: border-color 0.4s, background 0.4s, transform 0.4s;
+  display: flex;
+  flex-direction: column;
+}
+.pillar-card:hover {
+  border-color: var(--border-hover);
+  background: var(--bg-card-hover);
+  transform: translateY(-4px);
+}
+.pillar-icon {
+  font-size: 32px;
+  margin-bottom: 24px;
+  display: block;
+}
+.pillar-card h3 {
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 500;
+  margin-bottom: 16px;
+}
+.pillar-card p {
+  font-size: 15px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  flex: 1;
+}
+
+/* ---- WHO WE ARE ---- */
+.who-section { max-width: 1200px; margin: 0 auto; }
+.who-header { text-align: center; margin-bottom: 72px; }
+.who-header .section-title { margin: 0 auto; }
+.who-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+.who-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: border-color 0.4s, transform 0.4s;
+}
+.who-card:hover {
+  border-color: var(--border-hover);
+  transform: translateY(-4px);
+}
+.who-photo {
+  height: 300px;
+  background: linear-gradient(135deg, var(--bg-card) 0%, #1e1840 50%, #2a2060 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+}
+.who-info { padding: 32px 28px; }
+.who-info h3 {
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+.who-info .role {
+  font-size: 13px;
+  color: var(--accent);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  margin-bottom: 16px;
+  display: block;
+}
+.who-info p {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+/* ---- PRESS / BLOG ---- */
+.press-section { background: var(--bg-secondary); }
+.press-header {
+  max-width: 1200px;
+  margin: 0 auto 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.press-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+.press-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.4s, transform 0.4s;
+  display: block;
+}
+.press-card:hover {
+  border-color: var(--border-hover);
+  transform: translateY(-4px);
+}
+.press-img {
+  height: 220px;
+  background: linear-gradient(135deg, #1a1540, #2d2570, #3d35a0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  color: var(--text-muted);
+  position: relative;
+  overflow: hidden;
+}
+.press-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.press-card-body { padding: 28px 24px; }
+.press-tag {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.press-tag .date {
+  color: var(--text-muted);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  text-transform: none;
+}
+.press-card-body h3 {
+  font-family: var(--font-display);
+  font-size: 21px;
+  font-weight: 500;
+  line-height: 1.3;
+  margin-bottom: 12px;
+}
+.press-card-body p {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.65;
+  margin-bottom: 16px;
+}
+.read-more {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent);
+  letter-spacing: 0.02em;
+}
+
+/* ---- CTA ---- */
+.cta-section {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: clamp(100px, 12vw, 180px) clamp(24px, 5vw, 80px);
+}
+.cta-section .section-title { margin: 0 auto 24px; }
+.cta-btn {
+  display: inline-block;
+  margin-top: 40px;
+  padding: 16px 40px;
+  background: var(--accent);
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 8px;
+  letter-spacing: 0.02em;
+  transition: background 0.3s, transform 0.3s;
+}
+.cta-btn:hover { background: #7b6be7; transform: translateY(-2px); }
+
+/* ---- FOOTER ---- */
+footer {
+  padding: 60px clamp(24px, 5vw, 80px);
+  border-top: 1px solid var(--border);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.footer-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 48px;
+}
+.footer-logo svg { height: 24px; opacity: 0.5; }
+.footer-links { display: flex; gap: 32px; }
+.footer-links a {
+  font-size: 14px;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+.footer-links a:hover { color: var(--text-secondary); }
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+.footer-bottom span {
+  font-size: 12px;
+  color: var(--text-muted);
+  letter-spacing: 0.02em;
+}
+
+/* ---- HAMBURGER ---- */
+.hamburger { display: none; background: none; border: none; cursor: pointer; padding: 8px; position: relative; width: 36px; height: 36px; }
+.hamburger i { position: absolute; left: 6px; width: 24px; height: 1.5px; background: var(--text-secondary); border-radius: 2px; transition: all 0.35s cubic-bezier(0.4,0,0.2,1); }
+.hamburger i:nth-child(1) { top: 10px; }
+.hamburger i:nth-child(2) { top: 17px; }
+.hamburger i:nth-child(3) { top: 24px; }
+.hamburger.open i:nth-child(1) { top: 17px; transform: rotate(45deg); }
+.hamburger.open i:nth-child(2) { opacity: 0; }
+.hamburger.open i:nth-child(3) { top: 17px; transform: rotate(-45deg); }
+
+/* ---- MOBILE MENU OVERLAY ---- */
+.mobile-menu { position: fixed; inset: 0; z-index: 999; background: var(--bg-primary); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 36px; opacity: 0; pointer-events: none; transition: opacity 0.4s cubic-bezier(0.4,0,0.2,1); }
+.mobile-menu.open { opacity: 1; pointer-events: auto; }
+.mobile-menu a { font-family: var(--font-display); font-size: 32px; font-weight: 400; font-style: italic; color: var(--text-primary); text-decoration: none; opacity: 0; transform: translateY(20px); transition: opacity 0.5s, transform 0.5s, color 0.3s; }
+.mobile-menu.open a { opacity: 1; transform: translateY(0); }
+.mobile-menu.open a:nth-child(1) { transition-delay: 0.1s; }
+.mobile-menu.open a:nth-child(2) { transition-delay: 0.18s; }
+.mobile-menu.open a:nth-child(3) { transition-delay: 0.26s; }
+.mobile-menu a:hover { color: var(--accent); }
+
+/* ---- RESPONSIVE ---- */
+@media (max-width: 900px) {
+  .mission { grid-template-columns: 1fr; gap: 40px; }
+  .mission-visual { height: 300px; }
+  .pillars-grid, .who-grid, .press-grid { grid-template-columns: 1fr; }
+  .hero-pillars { flex-direction: column; gap: 16px; align-items: center; }
+  .press-header { flex-direction: column; align-items: flex-start; gap: 16px; }
+  .footer-top { flex-direction: column; gap: 24px; }
+  nav .nav-links { display: none; }
+  .hamburger { display: flex; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="/" class="logo" aria-label="Soto-Wright Foundation Home">
+    <img src="assets/logo-horizontal-dark.svg" alt="Soto-Wright Foundation" style="height:28px;">
+  </a>
+  <div class="nav-links">
+    <a href="#mission">Our Mission</a>
+    <a href="#who">Who We Are</a>
+    <a href="#press">Press</a>
+  </div>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <i></i><i></i><i></i>
+  </button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#mission" class="mobile-nav-link">Our Mission</a>
+  <a href="#who" class="mobile-nav-link">Who We Are</a>
+  <a href="#press" class="mobile-nav-link">Press</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-logo">
+    <img src="assets/logo-stacked-dark.svg" alt="Soto-Wright Family Foundation" style="height:140px;">
+  </div>
+  <h1>Inspiring tomorrow's <em>innovators.</em></h1>
+  <p class="hero-sub">A family foundation built on the belief that mentorship, education, and real-world exposure can change the trajectory of a young person's life.</p>
+  <div class="hero-pillars">
+    <span>Education</span>
+    <span>The Arts</span>
+    <span>Well-Being</span>
+  </div>
+  <div class="hero-scroll"><span></span></div>
+</section>
+
+<!-- MISSION -->
+<section id="mission">
+  <div class="mission">
+    <div>
+      <div class="section-label reveal">Our Mission</div>
+      <h2 class="section-title reveal reveal-delay-1">Propelling the dreams of future <em>entrepreneurs.</em></h2>
+      <p class="section-body reveal reveal-delay-2">The Soto-Wright Foundation offers mentorship and undergraduate scholarships to help propel the dreams of future entrepreneurs. Our focus spans three crucial pillars: education, the arts, and personal well-being.</p>
+      <p class="section-body reveal reveal-delay-3">We believe that entrepreneurship has the power to transform lives and communities. Through hands-on mentorship, strategic partnerships, and financial support, we empower the next generation of innovators to build a better future.</p>
+    </div>
+    <div class="mission-visual reveal reveal-delay-2" style="padding:0;overflow:hidden;">
+      <img src="assets/ja-event.jpg" alt="Soto-Wright family at Junior Achievement Miami" style="width:100%;height:100%;object-fit:cover;">
+    </div>
+  </div>
+</section>
+
+<!-- PILLARS -->
+<section class="pillars-section" id="pillars">
+  <div style="max-width:1200px;margin:0 auto;">
+    <div class="section-label reveal">Our Focus</div>
+    <h2 class="section-title reveal reveal-delay-1">Three pillars that <em>drive</em> our work.</h2>
+  </div>
+  <div class="pillars-grid">
+    <div class="pillar-card reveal reveal-delay-1">
+      <span class="pillar-icon">📚</span>
+      <h3>Education</h3>
+      <p>Scholarships and mentorship programs that open doors for aspiring entrepreneurs and innovators — from medical school to business accelerators.</p>
+    </div>
+    <div class="pillar-card reveal reveal-delay-2">
+      <span class="pillar-icon">🎨</span>
+      <h3>The Arts</h3>
+      <p>Supporting creative expression and the intersection of art, design, and technology. Creativity is the foundation of innovation.</p>
+    </div>
+    <div class="pillar-card reveal reveal-delay-3">
+      <span class="pillar-icon">🌱</span>
+      <h3>Well-Being</h3>
+      <p>Fostering personal growth, resilience, and holistic development in young leaders. Building a business starts with building yourself.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHO WE ARE -->
+<section id="who">
+  <div class="who-section">
+    <div class="who-header">
+      <div class="section-label reveal">Who We Are</div>
+      <h2 class="section-title reveal reveal-delay-1">The <em>Soto-Wright</em> family.</h2>
+    </div>
+    <div class="who-grid">
+
+      <div class="who-card reveal reveal-delay-1">
+        <div class="who-photo"><img src="assets/ivan-headshot.jpg" alt="Ivan Soto-Wright" style="width:100%;height:100%;object-fit:cover;"></div>
+        <div class="who-info">
+          <h3>Ivan Soto-Wright</h3>
+          <span class="role">Co-Founder</span>
+          <p>Entrepreneurship is at the heart of the Soto-Wright family. Ivan experienced the direct impact of mentorship programs during his early years as part of the Junior Achievement Boston Chapter. He went on to co-found MoonPay, a financial technology company that builds payment infrastructure for crypto. Throughout his career he has advocated for building systems and technologies that increase financial freedom.</p>
+        </div>
+      </div>
+
+      <div class="who-card reveal reveal-delay-2">
+        <div class="who-photo"><img src="assets/adrianna-headshot.jpg" alt="Adrianna Soto-Wright" style="width:100%;height:100%;object-fit:cover;"></div>
+        <div class="who-info">
+          <h3>Adrianna Soto-Wright</h3>
+          <span class="role">Co-Founder</span>
+          <p>Adrianna co-founded Digital Twin Studios, a creative marketing entity. Inspired by Ivan's impact as an entrepreneur, she crafted an experiential studio that supports the design, strategy and development of blockchain technology for startups and Fortune 500 companies. As co-founder of the Foundation, Adrianna drives the strategic vision behind community partnerships and philanthropic initiatives.</p>
+        </div>
+      </div>
+
+      <div class="who-card reveal reveal-delay-3">
+        <div class="who-photo"><img src="assets/natalie-headshot.jpg" alt="Natalie Soto-Wright" style="width:100%;height:100%;object-fit:cover;"></div>
+        <div class="who-info">
+          <h3>Natalie Soto-Wright</h3>
+          <span class="role">Co-Founder</span>
+          <p>Natalie co-founded Digital Twin Studios alongside Adrianna, bringing a creative and strategic perspective to the intersection of technology and design. Through the Foundation, Natalie is dedicated to expanding access to education and the arts, ensuring the next generation of leaders has the tools and inspiration they need to thrive.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PRESS -->
+<section class="press-section" id="press">
+  <div class="press-header">
+    <div>
+      <div class="section-label reveal">Press & News</div>
+      <h2 class="section-title reveal reveal-delay-1">Latest from the <em>foundation.</em></h2>
+    </div>
+  </div>
+  <div class="press-grid">
+
+    <a href="press/ivan-soto-wright-ja-miami-keynote-2026.html" class="press-card reveal reveal-delay-1">
+      <div class="press-img"><img src="assets/ja-event.jpg" alt="Junior Achievement Miami Company Program Competition"></div>
+      <div class="press-card-body">
+        <div class="press-tag">Entrepreneurship <span class="date">· April 13, 2026</span></div>
+        <h3>Ivan Soto-Wright Delivers Keynote at JA Miami's Largest-Ever Company Program</h3>
+        <p>More than 2,000 Miami high school students built real businesses from scratch. Ivan returned to the program that shaped his own path.</p>
+        <span class="read-more">Read more →</span>
+      </div>
+    </a>
+
+    <a href="press/soto-wright-foundation-upei-medical-scholarship.html" class="press-card reveal reveal-delay-2">
+      <div class="press-img">[Photo]</div>
+      <div class="press-card-body">
+        <div class="press-tag">Education <span class="date">· 2025</span></div>
+        <h3>Soto-Wright Foundation Funds Medical School Scholarship at UPEI</h3>
+        <p>A scholarship honoring the Wright family is helping a medical student on Prince Edward Island pursue rural healthcare.</p>
+        <span class="read-more">Read more →</span>
+      </div>
+    </a>
+
+    <a href="press/ivan-soto-wright-tracy-mourning-high-school.html" class="press-card reveal reveal-delay-3">
+      <div class="press-img">
+        <img src="assets/ivan_tracy_mourning.jpg" alt="Ivan Soto-Wright with student at Alonzo and Tracy Mourning Senior High School">
+      </div>
+      <div class="press-card-body">
+        <div class="press-tag">Community <span class="date">· March 8, 2024</span></div>
+        <h3>Ivan Soto-Wright Talks Entrepreneurship at Alonzo and Tracy Mourning Senior High</h3>
+        <p>The MoonPay founder visited Biscayne Bay's Mourning Senior High to share his founding story and answer students' questions.</p>
+        <span class="read-more">Read more →</span>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="section-label reveal">Get Involved</div>
+  <h2 class="section-title reveal reveal-delay-1">Join us in our mission to inspire tomorrows <em>innovators.</em></h2>
+  <p class="section-body reveal reveal-delay-2" style="margin:20px auto 0;text-align:center;">Get in touch to learn more about partnerships, mentorship, and scholarship opportunities.</p>
+  <a href="mailto:support@navihold.vc" class="cta-btn reveal reveal-delay-3">Contact Us</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-logo">
+      <img src="assets/logo-horizontal-dark.svg" alt="Soto-Wright Foundation" style="height:24px;opacity:0.5;">
+    </div>
+    <div class="footer-links">
+      <a href="#mission">Our Mission</a>
+      <a href="#who">Who We Are</a>
+      <a href="#press">Press</a>
+      <a href="mailto:support@navihold.vc">Contact</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Soto-Wright Family Foundation. All rights reserved.</span>
+    <span>sotowrightfoundation.org</span>
+  </div>
+</footer>
+
+<!-- SCROLL REVEAL -->
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Smooth nav scroll
+document.querySelectorAll('nav a[href^="#"], .mobile-nav-link').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) target.scrollIntoView({ behavior: 'smooth' });
+    // Close mobile menu
+    document.getElementById('hamburger').classList.remove('open');
+    document.getElementById('mobileMenu').classList.remove('open');
+  });
+});
+
+// Hamburger toggle
+document.getElementById('hamburger').addEventListener('click', () => {
+  document.getElementById('hamburger').classList.toggle('open');
+  document.getElementById('mobileMenu').classList.toggle('open');
+});
+</script>
+
+</body>
+</html>
